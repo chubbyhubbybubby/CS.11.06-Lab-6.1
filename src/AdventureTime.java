@@ -9,7 +9,15 @@ public class AdventureTime {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-
+        File file = new File("inputOneTwo.txt");
+        File file1 = new File ("inputThreeFour.txt");
+        String first = "inputOneTwo.txt";
+        String second = "inputThreeFour.txt";
+        int one = challengeOne(first);
+        int two = challengeTwo(first);
+        int three = challengeThree(second);
+        int four = challengeFour(second);
+        writeFileAllAnswers("result", one, two, three, four);
 
     }
 
@@ -22,7 +30,28 @@ public class AdventureTime {
      * @throws IOException
      */
     public static int challengeOne(String fileName) throws IOException {
-        return 0;
+
+        int linesInFile = countLinesInFile("inputOneTwo.txt");
+        int[] array = new int[linesInFile];
+
+        int index = 0;
+
+        File file = new File("inputOneTwo.txt");
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNextLine()) {
+
+            array[index++] = scanner.nextInt();
+
+        }
+        int greater = 0;
+        for (int i = 1; i<array.length; i++){
+            if (array[i]>array[i-1]){
+                greater ++;
+            }
+
+        }
+        return greater;
     }
 
     /** TODO 2
@@ -34,7 +63,30 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeTwo(String fileName) throws FileNotFoundException {
-        return 0;
+        int linesInFile = countLinesInFile(fileName);
+        int[] array = new int[linesInFile];
+        int count = 0;
+        int one = 0;
+        int two = 0;
+
+        File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
+        int index = 0;
+        while (scanner.hasNextInt()) {
+            array[index] = scanner.nextInt();
+            index++;
+        }
+        scanner.close();
+
+        for (int i = 0; i < array.length - 4; i++) {
+            one = array[i] + array[i + 1] + array[i + 2];
+            two = array[i + 1] + array[i + 2] + array[i + 3];
+            if (two > one) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     /** TODO 3
@@ -46,7 +98,40 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeThree(String fileName) throws FileNotFoundException {
-        return 0;
+        int linesInFile = countLinesInFile(fileName);
+        String[] array = new String[linesInFile];
+
+        File file = new File(fileName);
+        Scanner scanner = new Scanner(file);
+        int index = 0;
+        while (scanner.hasNextLine()) {
+            array[index] = scanner.nextLine();
+            index++;
+        }
+        scanner.close();
+        System.out.println(array);
+        int x = 0;
+        int y = 0;
+        String test = " ";
+        int z = 0;
+
+        for (int i =0; i<array.length; i++) {
+            if(array[i].length()==9){
+                x+= Integer.parseInt(array[i].substring(array[i].length() - 1));
+
+            }
+            else if (array[i].length()==6){
+                y+= Integer.parseInt(array[i].substring(array[i].length() - 1));
+            }
+            else{
+                y-= Integer.parseInt(array[i].substring(array[i].length() - 1));
+
+            }
+
+        }
+        System.out.println(x);
+        System.out.println(y);
+        return x*y;
     }
 
     /** TODO 4
@@ -58,7 +143,40 @@ public class AdventureTime {
      * @throws FileNotFoundException
      */
     public static int challengeFour(String filename) throws FileNotFoundException {
-        return 0;
+        int linesInFile = countLinesInFile(filename);
+        String[] array = new String[linesInFile];
+
+        File file = new File(filename);
+        Scanner scanner = new Scanner(file);
+        int index = 0;
+        while (scanner.hasNextLine()) {
+            array[index] = scanner.nextLine();
+            index++;
+        }
+        scanner.close();
+        int x = 0;
+        int y = 0;
+        String test = " ";
+        int z = 0;
+
+        for (int i =0; i<array.length; i++) {
+            if(array[i].length()==9){
+                x+= Integer.parseInt(array[i].substring(array[i].length() - 1));
+                y+=y*x;
+
+            }
+            else if (array[i].length()==6){
+                y+= Integer.parseInt(array[i].substring(array[i].length() - 1));
+            }
+            else{
+                y-= Integer.parseInt(array[i].substring(array[i].length() - 1));
+
+            }
+
+        }
+        System.out.println(x);
+        System.out.println(y);
+        return x*y;
     }
 
     /** This method will write the values passed as challengeOne, challengeTwo, challengeThree, and challengeFour to a text file.
